@@ -1,19 +1,24 @@
-import { Button } from './components/Button'
-import { Tag } from './components/Tag'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import SelectDishesPage from './pages/SelectDishes'
+import IngredientsPage from './pages/Ingredients'
+
+const queryClient = new QueryClient()
 
 export default function App() {
     return (
-        <div>
-            <h1 className="text-8xl text-border">Hello World</h1>
-            <Button variant="default" icon="add">
-                Add
-            </Button>
-            <Button variant="link">View list</Button>
-            <Button variant="secondary">Add</Button>
-            <div className="my-4">
-                <Tag variant="selected">Italian</Tag>
-                <Tag variant="muted">Italian</Tag>
-            </div>
-        </div>
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<SelectDishesPage />}>
+                        <Route
+                            path="ingredients/:dishId"
+                            element={<IngredientsPage />}
+                        />
+                    </Route>
+                    <Route path="*" element={<div>Not found</div>} />
+                </Routes>
+            </BrowserRouter>
+        </QueryClientProvider>
     )
 }

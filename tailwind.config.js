@@ -28,6 +28,10 @@ export default {
                     DEFAULT: 'hsl(var(--tag) / <alpha-value>)',
                     foreground: 'hsl(var(--tag-foreground) / <alpha-value>)',
                 },
+                rating: {
+                    DEFAULT: 'hsl(var(--rating) / <alpha-value>)',
+                    foreground: 'hsl(var(--rating-foreground) / <alpha-value>)',
+                },
 
                 muted: {
                     DEFAULT: 'hsl(var(--muted) / <alpha-value>)',

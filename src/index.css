@@ -21,5 +21,14 @@
 
         --tag: 32 100% 97%;
         --tag-foreground: 32 100% 55%;
+
+        --rating: 121 49% 54%;
+        --rating-foreground: 0 0% 100%;
+    }
+}
+
+@layer base {
+    body {
+        @apply bg-background text-foreground;
     }
 }
