@@ -1,10 +1,11 @@
-import { Dish } from '@/utils/types'
-import { Button } from '@/components/ui/Button'
+import RefrigeratorIcon from '@/assets/icons/Refrigerator'
 import StarIcon from '@/assets/icons/Star'
 import VegIcon from '@/assets/icons/Veg'
-import RefrigeratorIcon from '@/assets/icons/Refrigerator'
-import React from 'react'
+import { Button } from '@/components/ui/Button'
 import { cn } from '@/utils/cn'
+import { Dish } from '@/utils/types'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const Root = React.forwardRef<
     HTMLDivElement,
@@ -83,6 +84,7 @@ export const DishCard = React.forwardRef<
     HTMLDivElement,
     React.ComponentPropsWithoutRef<typeof Root> & { dish: Dish }
 >((props, ref) => {
+    const navigate = useNavigate()
     const { dish, ...etc } = props
     return (
         <Root ref={ref} {...etc}>
@@ -103,7 +105,11 @@ export const DishCard = React.forwardRef<
                     <div className="h-4 w-[0.5px] bg-muted-foreground"></div>
                     <div className="flex flex-col">
                         <div className="text-[6px] font-bold">Ingredients</div>
-                        <Button variant="link" className="px-0 py-0 text-[5px]">
+                        <Button
+                            variant="link"
+                            className="px-0 py-0 text-[5px]"
+                            onClick={() => navigate(`/ingredients/${dish.id}`)}
+                        >
                             View list
                         </Button>
                     </div>

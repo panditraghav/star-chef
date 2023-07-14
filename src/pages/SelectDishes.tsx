@@ -1,6 +1,10 @@
 import Container from '@/components/Container'
 import { DishCard } from '@/components/DishCard'
+import PopularDish from '@/components/PopularDish'
+import TimePicker from '@/components/TimePicker'
+import TransitionAnimation from '@/components/TransitionAnimation'
 import { Button } from '@/components/ui/Button'
+import { Tag } from '@/components/ui/Tag'
 import { Dish } from '@/utils/types'
 import { useQuery } from '@tanstack/react-query'
 
@@ -19,10 +23,36 @@ export default function SelectDishesPage() {
     const query = useQuery({ queryKey: ['dishes'], queryFn: fetchDishes })
 
     return (
-        <>
-            <Container>
-                <h2>Popular Dishes</h2>
-            </Container>
+        <TransitionAnimation>
+            <div className="sticky top-0 z-10 bg-background">
+                <TimePicker />
+                <Container>
+                    <div className="my-6 flex space-x-2 overflow-y-scroll scrollbar scrollbar-none">
+                        {new Array(5).fill(0).map((_, i) => {
+                            return (
+                                <Tag
+                                    key={i * Math.random()}
+                                    variant={i > 0 ? 'muted' : 'selected'}
+                                >
+                                    {i % 2 == 0 ? 'Indian' : 'Italian'}
+                                </Tag>
+                            )
+                        })}
+                    </div>
+                    <h2 className="text-lg font-bold">Popular Dishes</h2>
+                    <div className="flex gap-2 overflow-x-scroll p-2 scrollbar scrollbar-none">
+                        {query.data?.popularDishes.map((dish, i) => {
+                            return (
+                                <PopularDish
+                                    dish={dish}
+                                    key={dish.id}
+                                    variant={i > 0 ? 'ring' : 'default'}
+                                />
+                            )
+                        })}
+                    </div>
+                </Container>
+            </div>
             <Container>
                 <div className="mb-3 flex justify-between">
                     <h2 className="text-lg font-bold">Recommended</h2>
@@ -68,6 +98,6 @@ export default function SelectDishesPage() {
                     {query.isLoading && <div>Loading...</div>}
                 </div>
             </Container>
-        </>
+        </TransitionAnimation>
     )
 }

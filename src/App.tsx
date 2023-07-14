@@ -10,7 +10,8 @@ export default function App() {
         <QueryClientProvider client={queryClient}>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<SelectDishesPage />}>
+                    <Route path="/">
+                        <Route path="" element={<SelectDishesPage />} />
                         <Route
                             path="ingredients/:dishId"
                             element={<IngredientsPage />}
