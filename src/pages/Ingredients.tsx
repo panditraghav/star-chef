@@ -26,7 +26,7 @@ export default function IngredientsPage() {
 
     return (
         <TransitionAnimation>
-            <Container>
+            <Container className="overflow-x-hidden">
                 {query.isLoading && <div>Loading..</div>}
                 {query.data && (
                     <>
